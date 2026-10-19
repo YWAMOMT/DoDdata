@@ -1,0 +1,19 @@
+name: Contact Enrichment Scheduler
+
+on:
+  schedule:
+    - cron: '*/2 * * * *'
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Contact Enrichment Edge Function
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer sb_publishable_daoC89YuzD21j1bNxn22ng_qZm3A0kB" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            https://dfmbvteoqpupkpcsnqjt.supabase.co/functions/v1/Contact-enrichment
+        continue-on-error: true
